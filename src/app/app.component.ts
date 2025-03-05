@@ -8,6 +8,7 @@ import { ListaCompetidoresComponent } from "./lista-competidores/lista-competido
 import { FooterComponent } from "./footer/footer.component";
 import { ExpertoComponent } from './experto/experto.component';
 import { ParticipanteComponent } from './participante/participante.component';
+import { NotasComponent } from './notas/notas.component';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ import { ParticipanteComponent } from './participante/participante.component';
     FooterComponent,
     ExpertoComponent,
     ParticipanteComponent,
+    NotasComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'] // <-- Corregido

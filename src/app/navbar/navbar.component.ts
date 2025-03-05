@@ -12,6 +12,7 @@ import { EventEmitter } from '@angular/core';
 })
 export class NavbarComponent {
 
+
   mostrarPuntuacionesExperto: any;
   mostrarParticipantesExperto() {
     this.router.navigate(['/experto/experto-participante']);
@@ -78,5 +79,9 @@ export class NavbarComponent {
   mostrarParticipantes(): void {
     this.router.navigate(['/admin/participante']);
   }
+
+  mostrarNotas() {
+    this.router.navigate(['/experto/notas']);
+    }
 
 }

@@ -17,6 +17,7 @@ import { PuntuacionComponent } from './puntuacion/puntuacion.component';
 import { ExpertoParticipanteComponent } from './experto-participante/experto-participante.component';
 import { PruebaComponent } from './prueba/prueba.component';
 import { ItemComponent } from './item/item.component';
+import { NotasComponent } from './notas/notas.component';
 
 
 export const routes: Routes = [
@@ -40,6 +41,7 @@ export const routes: Routes = [
         { path: 'prueba', component: PruebaComponent, pathMatch: 'full' },
         { path: 'evaluacion', component: EvaluacionComponent, pathMatch: 'full' },
         { path: 'item', component: ItemComponent, pathMatch: 'full' },
+        { path: 'notas', component: NotasComponent, pathMatch: 'full' },
       ]
     },
     { path: 'registro', component: RegistroComponent, pathMatch: 'full' },

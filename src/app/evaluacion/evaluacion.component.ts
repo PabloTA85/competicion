@@ -17,7 +17,7 @@ import { EvaluacionService } from '../servicios/evaluacion.service';
   styleUrls: ['./evaluacion.component.css']
 })
 export class EvaluacionComponent implements OnInit {
-  prueba: any = {};  // Almacenar la prueba que se está editando
+
   pruebas: any[] = [];  // Array para almacenar todas las pruebas
   errorMessage: string = '';  // Propiedad para errores
   usuario: string = '';  // Propiedad para almacenar el nombre de usuario
@@ -44,20 +44,6 @@ export class EvaluacionComponent implements OnInit {
     return this.collapsedStates[id] === true;
   }
 
-  toggleParticipantes(prueba: any): void {
-    if (prueba.mostrarParticipantes === undefined) {
-      prueba.mostrarParticipantes = false;  // Asegurarte de que la propiedad exista
-    }
-  
-    prueba.mostrarParticipantes = !prueba.mostrarParticipantes;
-  
-    if (prueba.mostrarParticipantes) {
-      // Pasar la prueba seleccionada como argumento
-      this.ObtenerParticipantes(prueba);
-    } else {
-      this.listaParticipantes = [];  // Limpiar los participantes cuando se oculte la lista
-    }
-  }
   
 
   constructor(
@@ -114,27 +100,22 @@ export class EvaluacionComponent implements OnInit {
       });
   }
 
-  ObtenerParticipantes(prueba: any): void {
+  // Función para obtener los participantes de la prueba seleccionada
+  ObtenerParticipantes(): void {
     if (!this.usuario) {
       this.errorMessage = 'El usuario no está definido.';
       return;
     }
-  
-    if (!prueba || !prueba.id) {
-      console.error('Prueba no válida o sin ID');
-      this.errorMessage = 'La prueba no es válida';
-      return;
-    }
-  
+
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.token}`)
       .set('Content-Type', 'application/json');
-  
+
     // Solo obtener los participantes de la especialidad de la prueba seleccionada
     this.http.get<any[]>(`http://localhost:8080/api/participante/porEspecialidad/${this.usuario}`, { headers })
       .subscribe({
         next: (data: any[]) => {
-          this.listaParticipantes = data.filter(participante => participante.pruebaId === prueba.id);
+          this.listaParticipantes = data.filter(participante => participante.pruebaId === this.pruebaSeleccionada.id);
         },
         error: (err: any) => {
           console.error('Error al obtener los participantes', err);
@@ -142,7 +123,6 @@ export class EvaluacionComponent implements OnInit {
         }
       });
   }
-  
 
   seleccionarParticipante(participante: any, prueba: any): void {
     // Establecer los participantes y pruebas seleccionados
@@ -163,16 +143,15 @@ export class EvaluacionComponent implements OnInit {
     // LLamar a la función para guardar la evaluación después de abrir el modal
     //this.guardarEvaluacion();
   }
-
+  
 
   seleccionarPrueba(prueba: any): void {
     // Establecer la prueba seleccionada
     this.pruebaSeleccionada = prueba;
-  
+
     // Obtener los participantes solo de la prueba seleccionada
-    this.ObtenerParticipantes(prueba);  // Pasar la prueba seleccionada como argumento
+    this.ObtenerParticipantes();
   }
-  
 
 
   generarRango(max: number): number[] {

@@ -46,6 +46,9 @@
                 <li class="nav-item" *ngIf="loginService.isExperto()" routerLinkActive="active">
                     <button class="btn btn-outline-light me-2" (click)="mostrarItems()">Item</button>
                 </li>
+                <li class="nav-item" *ngIf="loginService.isExperto()" routerLinkActive="active">
+                    <button class="btn btn-outline-light me-2" (click)="mostrarNotas()">Notas</button>
+                </li>
             </ul>
 
             <!-- Controles de Login/Logout -->
